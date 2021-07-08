@@ -11,6 +11,30 @@ end
 class Barber < ActiveRecord::Base
 end
 
+before do
+	@barbers = Barber.all
+end
 get '/' do
+	@barbers = Barber.all
 	erb :index
+end
+get '/visit' do
+
+	erb :visit
+end
+
+post '/visit' do
+	@username = params[:username]
+	@phone = params[:phone]
+	@visittime = params[:visittime]
+	@choice = params[:choice]
+	@color = params[:color]
+	c = Client.new
+	c.name = @username
+	c.phone = @phone
+	c.datestamp = @visittime
+	c.barber = @choice
+	c.color = @color
+	c.save
+	erb "Вы записались!"
 end
