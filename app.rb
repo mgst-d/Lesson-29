@@ -24,17 +24,19 @@ get '/visit' do
 end
 
 post '/visit' do
-	@username = params[:username]
-	@phone = params[:phone]
-	@visittime = params[:visittime]
-	@choice = params[:choice]
-	@color = params[:color]
-	c = Client.new
-	c.name = @username
-	c.phone = @phone
-	c.datestamp = @visittime
-	c.barber = @choice
-	c.color = @color
+	# @username = params[:username]
+	# @phone = params[:phone]
+	# @visittime = params[:visittime]
+	# @choice = params[:choice]
+	# @color = params[:color]
+	# c = Client.new
+	# c.name = @username
+	# c.phone = @phone
+	# c.datestamp = @visittime
+	# c.barber = @choice
+	# c.color = @color
+	# c.save
+	c = Client.new params[:client]
 	c.save
 	erb "Вы записались!"
 end
