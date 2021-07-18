@@ -7,7 +7,7 @@ require 'sinatra/activerecord'
 #set :database, "sqlite3:barber.db" не работает rake db:migrate
 set :database, {adapter: "sqlite3", database: "barber.db"}
 class Client < ActiveRecord::Base
-	validates :name, presence: true
+	validates :name, presence: true, length: { minimum: 2 }
 	validates :phone, presence: true
 	validates :datestamp, presence: true
 	validates :barber, presence: true
@@ -27,7 +27,6 @@ get '/visit' do
 	@c = Client.new
 	erb :visit
 end
-
 post '/visit' do
 	# @username = params[:username]
 	# @phone = params[:phone]
@@ -49,4 +48,18 @@ post '/visit' do
 		@error = @c.errors.full_messages.first
 		erb :visit
 	end
+end
+
+get '/barber/:id' do
+	@barber = Barber.find(params[:id])
+	erb :barber
+
+
+get '/booking' do
+	@clients = Client.order('created_at desc')
+	erb :booking
+end
+get '/barber/:id' do
+	@client = Client.find(params[:id])
+	erb :client
 end
