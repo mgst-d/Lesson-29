@@ -3,7 +3,7 @@
 <form action="/visit" method="post">
   <div class="form-group">
     <label for="exampleInputEmail1">Ваше имя</label>
-    <input type="text" name="client[name]" class="form-control" id="exampleInputEmail1" placeholder="Введите ваше имя" value="">
+    <input type="text" name="client[name]" class="form-control" id="exampleInputEmail1" placeholder="Введите ваше имя" value="<%= @c.name %>">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Ваш телефон</label>
@@ -11,16 +11,15 @@
   </div>
   <div class="form-group">
     <label>Когда вас ждать</label>
-    <input type="text" name="client[datestamp]" class="form-control" id="datetimepicker" placeholder="Введите дату и время" value="">
+    <input type="text" name="client[datestamp]" class="form-control" id="datetimepicker" placeholder="Введите дату и время" value="<%= @datestamp %>">
   </div>
   <div class="form-group">
     <label>Парикмахер!</label>
      <select name="client[barber]">
-      
       <% @barbers.each do |bar| %>
-      <option value="<%= @c.barber %>" <%= 'selected' if params[barber] == bar.name %>><%= bar.name %></option>
+      <option value="<%= bar.name %>" ><%= bar.name %></option>
       <% end %>
-    </select>
+      </select>
   </div>
   <div class="form-group">
     <label>Выберите цват:</label>
